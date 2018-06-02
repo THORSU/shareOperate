@@ -6,7 +6,7 @@
 <mapper namespace="com.share.mapper.OrderMapper">
 
 
-    <select id="getOrders" parameterType="java.lang.String" resultType="com.share.pojo.Orders">
+    <select id="getOrders" resultType="com.share.pojo.Orders">
         select * from Orders
     </select>
 

@@ -29,8 +29,10 @@ public class ObjectsController {
     Object getObjects(HttpServletRequest request, HttpServletResponse response) {
         List<Object_1> objectList = objectsService.getObject();
         String objectCode = "";
+        Object_1 subObjectList = new Object_1();
         for (int i = 0; i < objectList.size(); i++) {
             objectCode = objectList.get(0).getObjectCode();
+//            subObjectList = objectList.get(0);
             System.out.println(objectCode);
         }
         Cookie name = new Cookie("objectCode", objectCode);

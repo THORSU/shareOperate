@@ -1,6 +1,7 @@
 package com.share.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.share.pojo.Orders;
 import com.share.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,11 @@ public class OrdersController {
     Object getOrdersByUserName(HttpServletRequest request, HttpServletResponse response) {
 
         List<Orders> ordersList = ordersService.getOrders();
+        String res = JSON.toJSONString(ordersList);
         if (ordersList.size() != 0) {
-            return ordersList;
+            return res;
         } else {
-            return "1";
+            return "order is null!";
         }
     }
 
