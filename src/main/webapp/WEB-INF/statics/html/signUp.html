@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商家注册</title>
+    <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+    <div>share<span>platform</span></div>
+</div>
+<br>
+<div class="login">
+    <input type="text" placeholder="手机号码/邮箱" id="name"/><br>
+    <input type="password" placeholder="请输入密码" id="pwd"/><br>
+    <input type="password" placeholder="请再次输入密码" id="pwd1"/><br>
+    <!--<input type="text" id="vcode" placeholder="请输入验证码" onblur="validateCode()"/><br>-->
+    <input type="button" value="注册" onclick="signUp()"/><br>
+</div>
+</body>
+<script type="text/javascript">
+    //前台验证密码
+    $("#pwd").focus(function () {
+        $("#passwordTip").text("*密码由不少于6位或大于16位数字和字母组成");
+        $("#passwordTip").css("color", "red");
+    })
+
+    function signUp() {
+        var name = $("#name").val();
+        var pwd = $("#pwd").val();
+        var pwd1 = $("#pwd1").val();
+        $.ajax({
+            type: "post",
+            url: "/share/signUp.from?name=" + name.trim() + "&pwd=" + pwd.trim() + "&pwd1=" + pwd1,
+            dataType: "html",
+            success: function (msg) {
+                if (msg == "sign up success") {
+                    window.location.href = 'index.html';
+                    alert("注册成功");
+                } else if (msg == "already exist") {
+                    alert("已存在")
+                } else if (msg == "blank") {
+                    alert("不能为空")
+                } else if (msg == "pwd different") {
+                    alert("两次密码不一致")
+                } else {
+                    alert("注册失败");
+                }
+            }
+        })
+    }
+</script>
+</html>

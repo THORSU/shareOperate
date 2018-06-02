@@ -2,6 +2,7 @@ package com.share.controller;
 
 import com.share.pojo.Manager;
 import com.share.service.IOperateService;
+import com.share.service.IRedisService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +22,9 @@ public class OperateController {
     private static Logger logger = Logger.getLogger(OperateController.class);
     @Autowired
     private IOperateService operateService;
-    //    @Autowired
-//    private IRedisService managerRedisService;
+    @Autowired
+    private IRedisService managerRedisService;
+
     private Manager manager = new Manager();
 
     //管理员登录
@@ -35,15 +37,15 @@ public class OperateController {
             return "blank";
         } else {
             //redis登录
-//            Manager rest = managerRedisService.getManger(name);
-//            if (rest != null) {
-//                if (rest.getMpassword().equals(pwd)) {
-//                    logger.info("redis登录成功");
-//                    return "1";
-//                } else {
-//                    return "0";
-//                }
-//            } else {
+            Manager rest = managerRedisService.getManger(name);
+            if (rest != null) {
+                if (rest.getMpassword().equals(pwd)) {
+                    logger.info("redis登录成功");
+                    return "OperateLogin Success";
+                } else {
+                    return "OperateLogin Fail";
+                }
+            } else {
             //mysql登录
             manager.setMname(name);
             manager.setMpassword(pwd);
@@ -54,10 +56,10 @@ public class OperateController {
                 return "OperateLogin Success";
             } else {
                 logger.error("0");
-                return "Operate";
+                return "OperateLogin Fail";
             }
         }
-//        }
+        }
     }
 
     //管理员注册
@@ -83,7 +85,7 @@ public class OperateController {
                 Manager res1 = operateService.getManager(manager);
                 logger.info(res1.toString());
                 //向redis添加数据
-//                managerRedisService.addManager(res1);
+                managerRedisService.addManager(res1);
                 if (num == 1) {
                     return "sign up success";
                 } else {

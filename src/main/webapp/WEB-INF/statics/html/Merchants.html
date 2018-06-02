@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运营端页面</title>
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <script src="../js/index.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="../css/addObject.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+</head>
+<script>
+    window.onload = function getOrders() {
+        $.ajax({
+            type: "POST",
+            url: "/Objects/getObjects.form",
+            dataType: "json",
+            success: function (msg) {
+                console.log(msg);
+//                if(msg!==null){
+//                    console.log("123456");
+//                    $("#addObject").style.display="none";
+//                    alert("无订单");
+//                }else {
+                var data = msg;
+                $.each(data, function (index, value) {
+                    console.log(index);
+                    console.log(value);
+                    var objectCode = value.objectCode;
+                    var merchantName = value.merchantName;
+                    var objectName = value.objectName;
+                    var username = value.userName;
+                    var objectPrice = value.objectPrice;
+                    $("#merchantName").append(merchantName);
+                    $("#objectCode").append(objectCode);
+                    $("#objectName").append(objectName);
+                    $("#objectPrice").append(objectPrice);
+                })
+            }
+
+
+//            }
+        })
+    }
+
+</script>
+
+<body>
+<div>
+    <form>
+        <div id="addObject">
+            <div data-role="header">
+                <div class="title">商品审核</div>
+            </div>
+            <br>
+            <div class="content">
+
+                <div>
+                    <span>商&nbsp家&nbsp&nbspID：<label id="merchantName"></label></span>
+                </div>
+                <br>
+                <div>
+                    <span>商品编码：<label id="objectCode"></label></span>
+                </div>
+                <br>
+                <div>
+                    <span>商&nbsp品&nbsp&nbsp名：<label id="objectName"></label></span>
+                </div>
+                <br>
+                <div>
+                    <span>商品单价：<label id="objectPrice"></label></span>
+                </div>
+                <!--<br>-->
+                <!--<div>-->
+                <!--<span >费&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp用：<label id="bill"></label></span>-->
+                <!--</div>-->
+                <!--<br>-->
+                <!--<div>-->
+                <!--<span >用&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp时：<label id="period"></label></span>-->
+                <!--</div>-->
+                <!--<br>-->
+                <!--<div>-->
+                <!--<span >起始&nbsp&nbsp&nbsp时间：<label id="startTime"></label></span>-->
+                <!--</div>-->
+                <!--<br>-->
+                <!--<div>-->
+                <!--<span >结束&nbsp&nbsp&nbsp时间：<label id="endTime"></label></span>-->
+                <!--</div>-->
+                <br>
+                <div>
+                    <input type="button" class="addObjectButton" value="通过" data-inline="true" onclick="update()">
+                </div>
+
+                <div>
+                    <!--<input type="button" class="addObjectButton" value="返回" data-inline="true" alt="./html/firstPage.html";>-->
+                    <!--<a  href="FirstPage.html">返回</a>-->
+                    <!--<a alt="./html/welcome.html" title="" href="javascript:;">返回</a>-->
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+    function update() {
+
+        $.ajax({
+            type: "post",
+            url: "/Object/updateObjects.form",
+            dataType: "html",
+            success: function (msg) {
+                if (msg == "add success") {
+                    alert("添加成功");
+                } else {
+                    alert("添加失败");
+                }
+            }
+        })
+    }
+</script>
+
+</html>

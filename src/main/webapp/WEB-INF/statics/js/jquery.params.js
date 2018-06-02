@@ -169,7 +169,6 @@ new function (settings) {
                             else
                                 o[key] = value;
                         }
-
                         jQuery.each(orig, function (key, value) {
                             if (!is(value)) return true;
                             add(obj, key, build(value));
@@ -177,7 +176,6 @@ new function (settings) {
                     }
                     return obj;
                 }
-
                 this.keys = build(this.keys);
                 return this;
             },

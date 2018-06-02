@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.share.mapper.ObjectsMapper">
+
+
+    <select id="getObject" parameterType="java.lang.String" resultType="com.share.pojo.Object_1">
+        select * from Objects  where object_status =0
+    </select>
+
+
+    <update id="modify" parameterType="java.lang.String">
+        UPDATE Objects
+        <trim prefix="set" suffixOverrides=",">
+            object_status=1,
+        </trim>
+        where object_code=#{objectCode}
+    </update>
+
+</mapper>
