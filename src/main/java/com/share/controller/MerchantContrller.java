@@ -2,6 +2,7 @@ package com.share.controller;
 
 
 import com.share.pojo.Merchant;
+import com.share.service.IRedisService;
 import com.share.service.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ public class MerchantContrller {
 
     @Autowired
     private MerchantService merchantService;
+    @Autowired
+    private IRedisService redisService;
     private Merchant merchant;
 
     @RequestMapping(value = "/getMerchants.form", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
@@ -53,6 +56,15 @@ public class MerchantContrller {
             }
         }
 //        String objectCode = request.getParameter("objectCode");
+
+        List<Merchant> merchantsList = merchantService.getMerchants();
+//        merchantsList.stream().filter(Merchant::getMerchantName==name);
+        for (int i = 0; i < merchantsList.size(); i++) {
+            if (merchantsList.get(i).getMerchantName().equals(name)) {
+                merchantsList.get(i).setMerchantStatus("1");
+                redisService.updateMerchant(merchantsList.get(i));
+            }
+        }
         merchantService.modify(name);
         return "modify";
     }

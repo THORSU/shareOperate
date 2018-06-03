@@ -41,4 +41,11 @@ public interface IRedisService {
      * @param object_1
      */
     void addObject(Object_1 object_1);
+
+    /**
+     * 更新redis商家状态
+     *
+     * @param merchant
+     */
+    void updateMerchant(Merchant merchant);
 }

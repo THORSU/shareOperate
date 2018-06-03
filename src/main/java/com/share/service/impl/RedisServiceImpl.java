@@ -59,4 +59,10 @@ public class RedisServiceImpl implements IRedisService {
         HashOperations<String, String, String> hashOperations = redisTemplate.opsForHash();
         hashOperations.put("shareObject", "shareObject" + object_1.getObjectCode(), JSON.toJSONString(object_1));
     }
+
+    @Override
+    public void updateMerchant(Merchant merchant) {
+        HashOperations<String, String, String> hashOperations = redisTemplate.opsForHash();
+        hashOperations.put("merchant", merchant.getMerchantName(), JSON.toJSONString(merchant));
+    }
 }

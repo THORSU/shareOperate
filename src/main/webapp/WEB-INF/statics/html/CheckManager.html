@@ -25,13 +25,13 @@
                     console.log(value);
                     var merchantName = value.merchantName;
                     var merchantPassword = value.merchantPassword;
-                    var orderCode = value.orderCode;
+                    var merchantStatus = value.merchantStatus;
                     var username = value.userName;
                     var objectId = value.objectId;
                     var subObjectId = value.subObjectId;
                     $("#merchantName").append(merchantName);
                     $("#merchantPassword").append(merchantPassword);
-                    $("#objectId").append(objectId);
+                    $("#merchantStatus").append(merchantStatus);
                     $("#subObjectId").append(subObjectId);
 
                 })
@@ -47,16 +47,16 @@
     <form>
         <div id="addObject">
             <div data-role="header">
-                <div class="title">订单</div>
+                <div class="title">商家审核</div>
             </div>
             <br>
             <div class="content">
                 <div>
-                    <span>用&nbsp&nbsp&nbsp&nbsp户&nbsp&nbsp&nbspId：<label id="merchantPassword"></label></span>
+                    <span>商家名：<label id="merchantName"></label></span>
                 </div>
                 <br>
                 <div>
-                    <span>商品总表Id：<label id="merchantName"></label></span>
+                    <span>商家状态：<label id="merchantStatus"></label></span>
                 </div>
                 <br>
                 <div>

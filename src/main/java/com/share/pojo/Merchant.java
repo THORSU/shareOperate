@@ -1,9 +1,6 @@
 package com.share.pojo;
 
-/**
- * @author: QuincySu
- * @Date: 2018/5/21
- */
+
 public class Merchant {
     //商家id
     private String id;
@@ -11,6 +8,16 @@ public class Merchant {
     private String merchantName;
     //商家密码
     private String merchantPassword;
+
+    private String merchantStatus;
+
+    public String getMerchantStatus() {
+        return merchantStatus;
+    }
+
+    public void setMerchantStatus(String merchantStatus) {
+        this.merchantStatus = merchantStatus;
+    }
 
     public String getId() {
         return id;

@@ -9,4 +9,5 @@ public interface MerchantService {
     List<Merchant> getMerchants();
 
     public int modify(String MerchantName);
+
 }
